@@ -1,5 +1,6 @@
 const { response } = require("express");
 const student=require("../models/schema.js");
+var mongo = require('mongodb');
 
 module.exports={
     display: async (req,res)=>{
@@ -21,10 +22,10 @@ module.exports={
         }
     },
     getbyid: async (req,res)=>{
-        const id=req.params.id;
+        const ID=req.params.id;
         try{
-            const stud=await student.findById(id);
-            res.json({user});
+            const stud=await student.findById(ID);
+            res.json(stud);
         }catch(error){
             res.json({message: error.message});
 

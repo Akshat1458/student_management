@@ -2,8 +2,9 @@ import axios from 'axios';
 
 const url="http://localhost:5000/user";
 
-export const display=async ()=>{
-    return await axios.get(url);
+export const display=async (id)=>{
+    id=id || '';
+    return await axios.get(`${url}/${id}`);
 }
 
 export const addstud= async (stud)=>{

@@ -1,6 +1,7 @@
 import { display } from "../service/api.js";
 import { react, useEffect, useState } from "react";
 import Editstud from "./editstud.js";
+import {Link} from 'react-router-dom';
 // import { TableCell, TableHead, TableRow } from "@mui/material";
 
 // let students=[];
@@ -31,8 +32,9 @@ function Allstud(){
                         <td>{s.name}</td>
                         <td>{s.roll_no}</td>
                         <td>{s.class}</td>
-                        <td><button>EDIT</button></td>
-                        <td><button>DELETE</button></td>
+                        
+                        <td><Link to={`/edit/${s._id}`}><button >EDIT</button></Link></td>
+                        
                     </tr>
                 ))
             }
