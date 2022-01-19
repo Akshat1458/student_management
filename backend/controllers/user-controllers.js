@@ -1,6 +1,17 @@
 const { response } = require("express");
 const student=require("../models/schema.js");
-var mongo = require('mongodb');
+const multer= require("multer");
+
+const storage= multer.diskStorage({
+    destination: (req,file,callback )=>{
+        callback(null,"../frontend/public/uploads");
+    },
+    filename: (req,file,callback)=>{
+        callback(null, file.originalname);
+    }
+});
+
+const upload= multer({storage: storage});
 
 module.exports={
     display: async (req,res)=>{
@@ -12,9 +23,16 @@ module.exports={
             res.json({message: error.message});
         }
     },
+    upload,
     addstudent: async (req,res)=>{
+        
         const stud=req.body;
-        const newstud=new student(stud);
+        const newstud=new student({
+            name:stud.name,
+            roll_no: stud.roll_no,
+            class: stud.class,
+            img: req.file.name
+        });
         try{
             await newstud.save();
         }catch(error){
