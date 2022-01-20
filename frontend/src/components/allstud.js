@@ -2,9 +2,10 @@ import { display } from "../service/api.js";
 import { react, useEffect, useState } from "react";
 import Editstud from "./editstud.js";
 import {Link} from 'react-router-dom';
+import { Alert } from "bootstrap";
+import img from "../assets/images/dp1.jpg";
 // import { TableCell, TableHead, TableRow } from "@mui/material";
 
-// let students=[];
 function Allstud(){
     const [students, setstudents] = useState([]);
     useEffect(() => {
@@ -16,6 +17,7 @@ function Allstud(){
         // console.log(response.data);
         setstudents(response.data);
     };
+    const img="dp1.jpg";
     return (
         <table>
             <thead>
@@ -26,17 +28,20 @@ function Allstud(){
             </tr>
             </thead>
             <tbody>
-            {
-                students.map((s)=>(
-                    <tr>
+            {   
+                
+                students.map((s)=>{
+                    const image=require("../assets/images/"+s.img);
+                    return(<tr key={s._id}>
                         <td>{s.name}</td>
                         <td>{s.roll_no}</td>
                         <td>{s.class}</td>
-                        
+                        <td><img src={image} alt={"..."} style={{width:"40px", height:"40px"}}/></td>
                         <td><Link to={`/edit/${s._id}`}><button >EDIT</button></Link></td>
                         
-                    </tr>
-                ))
+                    </tr>)
+                    
+                })
             }
             </tbody>
         </table>

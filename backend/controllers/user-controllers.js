@@ -4,7 +4,7 @@ const multer= require("multer");
 
 const storage= multer.diskStorage({
     destination: (req,file,callback )=>{
-        callback(null,"../frontend/public/uploads");
+        callback(null,"../frontend/src/assets/images");
     },
     filename: (req,file,callback)=>{
         callback(null, file.originalname);
@@ -31,7 +31,7 @@ module.exports={
             name:stud.name,
             roll_no: stud.roll_no,
             class: stud.class,
-            img: req.file.name
+            img: req.file.filename
         });
         try{
             await newstud.save();
@@ -42,8 +42,9 @@ module.exports={
     getbyid: async (req,res)=>{
         const ID=req.params.id;
         try{
-            const stud=await student.findById(ID);
-            res.json(stud);
+            const stud=await student.find({_id:ID});
+            console.log(stud);
+            return res.json(stud);
         }catch(error){
             res.json({message: error.message});
 
