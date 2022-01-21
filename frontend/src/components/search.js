@@ -7,7 +7,6 @@ function Search() {
     const [result, setresult] = useState([]);
     const onValueChange = (e) => {
         setstr(e.target.value);
-        // console.log(str);
     }
     const display = async () => {
         const find = {
@@ -15,8 +14,6 @@ function Search() {
         };
         const res = await search(find);
         setresult(res.data);
-        console.log(result);
-
     }
     return (
         <form>
