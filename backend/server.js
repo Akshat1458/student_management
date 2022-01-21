@@ -3,10 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const route=require('./route/route.js');
-// const dbRouter = require('./dbroutes');
+const users=require('./route/users.js')
 const passport = require("passport");
 const bodyparser= require("body-parser");
-// const users = require("./routes/users");
 
 dotenv.config();
 const app=express();
@@ -22,11 +21,9 @@ app.get('/',(req,res)=>{
     res.send("Hello")
 });
 app.use('/user',route);
+app.use('/users',users);
 app.use(passport.initialize());
-// Passport config
-// require("./config/passport")(passport);
-// Routes
-// app.use("/api/auth", users);
+
 
 const start = async () => {
     if (!process.env.DB_URI) {

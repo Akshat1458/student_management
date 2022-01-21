@@ -10,3 +10,7 @@ export const display=async (id)=>{
 export const addstud= async (stud)=>{
     return await axios.post(`${url}/add`,stud);
 }
+
+export const search = async (s)=>{
+    return await axios.post(`${url}/search`,s);
+}

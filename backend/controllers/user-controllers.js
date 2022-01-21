@@ -50,6 +50,21 @@ module.exports={
 
         }
     },
+    searching: async (req, res)=>{
+        const tosearch= req.body.str;
+        try{
+            let result=await student.find({"name":tosearch});
+            let result2=[]
+            if(!isNaN(tosearch))
+                result2= await student.find({"roll_no":Number(tosearch)});
+            let result3=await student.find({"class": tosearch});
+            result = result.concat(result2,result3);
+            res.json(result);
+        }catch(error){
+            res.json({message:error.message});
+        }
+
+    },
     edit: async (req,res)=>{
         const stud=req.body;
         const editstud=new student(stud);
@@ -69,6 +84,3 @@ module.exports={
         }
     }
 }
-// export const display=(req,res)=>{
-//     res.send("hello");
-// };
