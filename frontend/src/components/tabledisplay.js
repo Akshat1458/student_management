@@ -1,5 +1,9 @@
 import {Link} from "react-router-dom";
 function Tabledisplay(props){
+    // console.log('incoming state');
+    // console.log(props.students);
+
+    if(props.students.length)
     return (
         <table>
             <thead>
@@ -29,5 +33,7 @@ function Tabledisplay(props){
             </tbody>
         </table>
     );
+    else 
+        return (<div></div>);
 }
 export default Tabledisplay;
